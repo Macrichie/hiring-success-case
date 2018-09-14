@@ -17,6 +17,14 @@ class HiringsController < ApplicationController
     @hiring = Hiring.new
   end
 
+  def new_upload; end
+
+  def upload
+    @saved_file = HiringUpload.create!(upload_params)
+    ImportDataJob.perform_now(@saved_file)
+    redirect_to hirings_path
+  end
+
   # GET /hirings/1/edit
   def edit
   end
@@ -62,13 +70,17 @@ class HiringsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hiring
-      @hiring = Hiring.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_hiring
+    @hiring = Hiring.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def hiring_params
-      params.require(:hiring).permit(:name, :year, :city_id, :skill_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def hiring_params
+    params.require(:hiring).permit(:name, :year, :city_id, :skill_id)
+  end
+
+  def upload_params
+    { csv_file: params.require(:csv_file) }
+  end
 end
