@@ -11,6 +11,41 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-between" style="background-color: #e3f2fd;">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img src="https://app.vanhack.com/Content/img/login/vanhack-logo.svg" width="226" height="48" alt="">
+        </a>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav ml-auto" style="font-size: 20px;">
+          <li class="nav-item">
+            <a class="nav-link <%=params[:controller] == 'home' ? 'active' : '' %>" href="<%= root_url %>">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%=params[:controller] == 'hirings' ? 'active' : '' %>" href="<%= hirings_url %>">Hirings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%=params[:controller] == 'cities' ? 'active' : '' %>" href="<%= cities_url %>">Cities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%=params[:controller] == 'skills' ? 'active' : '' %>" href="<%= skills_url %>">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%=params[:controller] == 'areas' ? 'active' : '' %>" href="<%= areas_url %>">Areas</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="jumbotron" style="background-color: #ffffff;">
+      <div class="container" >
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

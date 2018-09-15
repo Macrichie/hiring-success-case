@@ -2,14 +2,14 @@
 
 <h1>Hirings</h1>
 
-<table>
+<table class="table-striped">
   <thead>
     <tr>
       <th>Name</th>
       <th>City</th>
       <th>Skill</th>
       <th>Year</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -20,7 +20,6 @@
         <td><%= hiring.city.name %></td>
         <td><%= hiring.skill.name %></td>
         <td><%= hiring.year %></td>
-        <td><%= link_to 'Show', hiring %></td>
         <td><%= link_to 'Edit', edit_hiring_path(hiring) %></td>
         <td><%= link_to 'Destroy', hiring, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -30,4 +29,5 @@
 
 <br>
 
-<%= link_to 'New Hiring', new_hiring_path %> <%= link_to 'Import from CSV', hirings_upload_new_path %>
+<%= link_to 'New Hiring', new_hiring_path, class: 'btn btn-primary' %>
+<%= link_to 'Import from CSV', hirings_upload_new_path, class: 'btn btn-primary' %>

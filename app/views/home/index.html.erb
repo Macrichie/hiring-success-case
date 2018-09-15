@@ -1,16 +1,22 @@
-<%= link_to 'Hirings', hirings_path %>
-<%= link_to 'Cities', cities_path %>
-<%= link_to 'Skills', skills_path %>
-<%= link_to 'Areas', areas_path %>
-
-<h1>Total Hirings</h1>
-<%= Hiring.count %>
-
-<h1>Hirings by Cities</h1>
-<%= pie_chart Hiring.joins(:city).group('cities.name').count, width: "660px", height: "408px" %>
-
-<h1>Hirings by Skills</h1>
-<%= pie_chart Hiring.joins(:skill).group('skills.name').count, width: "660px", height: "408px" %>
-
-<h1>Hirings by Year</h1>
-<%= area_chart Hiring.group(:year).count, width: "660px", height: "408px" %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4>Hirings by Skills</h4>
+      <%= pie_chart Hiring.joins(:skill).group('skills.name').count %>
+    </div>
+    <div class="col-lg-6">
+      <h4>VanHackers Hired</h4>
+      <h1><%= Hiring.count %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <h4>Hirings by Cities</h4>
+      <%= pie_chart Hiring.joins(:city).group('cities.name').count %>
+    </div>
+    <div class="col-lg-6">
+      <h4>Hirings by Year</h4>
+      <%= area_chart Hiring.group(:year).count %>
+    </div>
+  </div>
+</div>

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :cities
   get 'hirings/upload/new', to: 'hirings#new_upload'
   post 'hirings/upload', to: 'hirings#upload'
-  get '/', to: 'home#index'
+  get root to: 'home#index'
 end
