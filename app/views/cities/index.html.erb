@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'shared/notice_success' %>
 
-<h1>Cities</h1>
+<h1 class="text-primary">Cities</h1>
 
 <table class="table-striped">
   <thead>
@@ -14,13 +14,13 @@
     <% @cities.each do |city| %>
       <tr>
         <td><%= city.name %></td>
-        <td><%= link_to 'Edit', edit_city_path(city) %></td>
-        <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to image_tag('edit.png'), edit_city_path(city) %></td>
+        <td><%= link_to image_tag('destroy.png'), city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<%= will_paginate @cities, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 <%= link_to 'New City', new_city_path, class: 'btn btn-primary' %>

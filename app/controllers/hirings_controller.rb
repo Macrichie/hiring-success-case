@@ -4,7 +4,7 @@ class HiringsController < ApplicationController
   # GET /hirings
   # GET /hirings.json
   def index
-    @hirings = Hiring.all
+    @hirings = Hiring.all.page params[:page]
   end
 
   # GET /hirings/1
@@ -36,7 +36,7 @@ class HiringsController < ApplicationController
 
     respond_to do |format|
       if @hiring.save
-        format.html { redirect_to @hiring, notice: 'Hiring was successfully created.' }
+        format.html { redirect_to hirings_url, notice: 'Hiring was successfully created.' }
         format.json { render :show, status: :created, location: @hiring }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class HiringsController < ApplicationController
   def update
     respond_to do |format|
       if @hiring.update(hiring_params)
-        format.html { redirect_to @hiring, notice: 'Hiring was successfully updated.' }
+        format.html { redirect_to hirings_url, notice: 'Hiring was successfully updated.' }
         format.json { render :show, status: :ok, location: @hiring }
       else
         format.html { render :edit }

@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'shared/notice_success' %>
 
-<h1>Hirings</h1>
+<h1 class="text-primary">Hirings</h1>
 
 <table class="table-striped">
   <thead>
@@ -20,14 +20,13 @@
         <td><%= hiring.city.name %></td>
         <td><%= hiring.skill.name %></td>
         <td><%= hiring.year %></td>
-        <td><%= link_to 'Edit', edit_hiring_path(hiring) %></td>
-        <td><%= link_to 'Destroy', hiring, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to image_tag('edit.png'), edit_hiring_path(hiring) %></td>
+        <td><%= link_to image_tag('destroy.png'), hiring, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
+<%= will_paginate @hirings, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 <%= link_to 'New Hiring', new_hiring_path, class: 'btn btn-primary' %>
 <%= link_to 'Import from CSV', hirings_upload_new_path, class: 'btn btn-primary' %>

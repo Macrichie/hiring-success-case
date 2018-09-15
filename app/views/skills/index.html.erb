@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'shared/notice_success' %>
 
-<h1>Skills</h1>
+<h1 class="text-primary">Skills</h1>
 
 <table class="table-striped">
   <thead>
@@ -16,13 +16,13 @@
       <tr>
         <td><%= skill.name %></td>
         <td><%= skill.area.name %></td>
-        <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
-        <td><%= link_to 'Destroy', skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to image_tag('edit.png'), edit_skill_path(skill) %></td>
+        <td><%= link_to image_tag('destroy.png'), skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<%= will_paginate @skills, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 <%= link_to 'New Skill', new_skill_path, class: 'btn btn-primary' %>
