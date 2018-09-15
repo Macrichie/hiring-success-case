@@ -1,22 +1,35 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-6">
-      <h4>Hirings by Skills</h4>
-      <%= pie_chart Hiring.joins(:skill).group('skills.name').count %>
+<% if Hiring.count > 0 %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6">
+        <h4 class="text-primary">Hirings by Skills</h4>
+        <%= pie_chart Hiring.joins(:skill).group('skills.name').count %>
+      </div>
+      <div class="col-lg-6">
+        <h4 class="text-primary">VanHackers Hired</h4>
+        <div class="w-100 p-3" align="center">
+          <span class="align-bottom">
+            <h1 class="display-1 text-primary"><%= Hiring.count %></h1>
+            <p class="lead">Our goal is to reach 1000 VanHackers hired.</p>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="col-lg-6">
-      <h4>VanHackers Hired</h4>
-      <h1><%= Hiring.count %></h1>
+    <div class="row">
+      <div class="col-lg-6">
+        <h4 class="text-primary">Hirings by Cities</h4>
+        <%= pie_chart Hiring.joins(:city).group('cities.name').count %>
+      </div>
+      <div class="col-lg-6">
+        <h4 class="text-primary">Hirings by Year</h4>
+        <%= area_chart Hiring.group(:year).count %>
+      </div>
+    </div>
+    <div class="row">
+        <h4 class="text-primary">Skills by Year</h4>
+        <%= line_chart Skill.all.map { |skill|
+          { name: skill.name, data: skill.hirings.group(:year).count }
+        } %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-6">
-      <h4>Hirings by Cities</h4>
-      <%= pie_chart Hiring.joins(:city).group('cities.name').count %>
-    </div>
-    <div class="col-lg-6">
-      <h4>Hirings by Year</h4>
-      <%= area_chart Hiring.group(:year).count %>
-    </div>
-  </div>
-</div>
+<% end %>
