@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2018_09_14_034221) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -53,8 +56,8 @@ ActiveRecord::Schema.define(version: 2018_09_14_034221) do
   create_table "hirings", force: :cascade do |t|
     t.string "name"
     t.integer "year"
-    t.integer "city_id"
-    t.integer "skill_id"
+    t.bigint "city_id"
+    t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_hirings_on_city_id"
@@ -63,10 +66,13 @@ ActiveRecord::Schema.define(version: 2018_09_14_034221) do
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
-    t.integer "area_id"
+    t.bigint "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["area_id"], name: "index_skills_on_area_id"
   end
 
+  add_foreign_key "hirings", "cities"
+  add_foreign_key "hirings", "skills"
+  add_foreign_key "skills", "areas"
 end
